@@ -23,12 +23,10 @@
     - grafana_dashboards
 
 - include_tasks: install.yml
-  become: true
   tags:
     - grafana_install
 
 - include_tasks: configure.yml
-  become: true
   tags:
     - grafana_configure
 
@@ -93,7 +91,6 @@
     - grafana_run
 
 - name: "Check if there are any dashboards in local {{ grafana_dashboards_dir }}"
-  become: false
   set_fact:
     found_dashboards: "{{ lookup('fileglob', grafana_dashboards_dir + '/*.json', wantlist=True) }}"
   tags:
